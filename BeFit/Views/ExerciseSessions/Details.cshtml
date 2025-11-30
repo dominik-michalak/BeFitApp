@@ -1,0 +1,56 @@
+﻿@model BeFitApp.Models.ExerciseSession
+
+@{
+    ViewData["Title"] = "Session Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Exercise Session</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Start Time</dt>
+        <dd class="col-sm-10">@Model.StartDateTime.ToString("g")</dd>
+
+        <dt class="col-sm-2">End Time</dt>
+        <dd class="col-sm-10">@Model.EndDateTime.ToString("g")</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.IntensityLevel)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.IntensityLevel)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.IsCompleted)</dt>
+        <dd class="col-sm-10">@(Model.IsCompleted ? "Yes" : "No")</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Notes)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Notes)</dd>
+    </dl>
+</div>
+
+<h4>Exercises in this Session</h4>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Exercise</th>
+            <th>Sets</th>
+            <th>Reps</th>
+            <th>Weight</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var exercise in Model.Exercises)
+        {
+            <tr>
+                <td>@exercise.ExerciseTypeNav?.ExerciseName</td>
+                <td>@exercise.Sets</td>
+                <td>@exercise.Repetitions</td>
+                <td>@exercise.Weight</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

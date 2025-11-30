@@ -1,0 +1,41 @@
+﻿@model IEnumerable<BeFitApp.Models.UserViewStatistics>
+
+@{
+    ViewData["Title"] = "Statistics (Last 4 Weeks)";
+}
+
+<h1>Your Statistics</h1>
+<p class="text-muted">Summary of your workouts from the last 4 weeks.</p>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Exercise Name</th>
+            <th>Times Performed</th>
+            <th>Total Repetitions</th>
+            <th>Avg. Weight (kg)</th>
+            <th>Max Weight (kg)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="5" class="text-center">No workout data found for the last 30 days.</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ExerciseTypeName</td>
+                    <td>@item.TimesPerformed</td>
+                    <td>@item.TotalRepetitions</td>
+                    <td>@item.AverageWeight.ToString("N2")</td>
+                    <td>@item.MaxWeight.ToString("N2")</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
